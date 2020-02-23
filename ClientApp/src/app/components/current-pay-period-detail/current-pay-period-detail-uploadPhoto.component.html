@@ -1,0 +1,21 @@
+<div class="mb-2">
+  <h1 mat-dialog-title>Upload Receipt</h1>
+  <mat-dialog-content>
+    <div>
+      <div class="row">
+        <div class="col-sm-4" *ngFor='let url of urls'>
+          <img [src]="url" style="max-height: 200px"> <br />
+        </div>
+      </div>
+      <input type='file' (change)="onSelectFile($event)" accept="image/*" multiple required>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button color="primary" class="mat-raised-button mb-2" (click)="close()">
+      Close
+    </button>
+    <button color="primary" class="mat-raised-button mat-primary mb-2" (click)="onAdd()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</div>

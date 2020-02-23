@@ -1,0 +1,24 @@
+<div class="mat-elevation-z8">
+  <table class="table" mat-table [dataSource]="dataSource">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element" routerLink="/home/receipt-submission/{{element.id}}" class="cursor">
+        {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="conductedOn">
+      <th mat-header-cell *matHeaderCellDef> Conducted On </th>
+      <td mat-cell *matCellDef="let element" routerLink="/home/receipt-submission/{{element.id}}" class="cursor">
+        {{element.conductedOn | date:'MM/dd/yyyy h:mm a'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="conductedAt">
+      <th mat-header-cell *matHeaderCellDef> Conducted At </th>
+      <td mat-cell *matCellDef="let element" routerLink="/home/receipt-submission/{{element.id}}" class="cursor">
+        {{element.storeName}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div style="text-align: center;background: #fff;" *ngIf="dataSource.length === 0">No Records Found</div>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+</div>

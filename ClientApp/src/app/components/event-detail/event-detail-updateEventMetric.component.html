@@ -1,0 +1,106 @@
+<div class="mb-2">
+  <h1 mat-dialog-title>Update Event Details</h1>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Number of people sampled" type="number" [disabled]="!editEnabled" maxlength="50" required [(ngModel)]="data.numberOfPeopleSampled"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Number of bottles sold" type="number" [disabled]="!editEnabled" maxlength="50" required [(ngModel)]="data.numberOfBottlesSold"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Number of Customers in Store" type="number" [disabled]="!editEnabled" maxlength="50" required [(ngModel)]="data.approxNumberOfCustomersInStore"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+    </mat-form-field>
+    <span style="font-size: 1.1rem;font-weight: 500;">Demographic breakdown</span>
+    <br>
+    <span style="font-size: 1rem;font-weight: 500;">Age</span>
+    <div class="row">
+      <div class="col-sm-2">
+        <mat-form-field>
+          <input matInput placeholder="21-30" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxAgeBreakdown.twenties"
+                 onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-2">
+        <mat-form-field>
+          <input matInput placeholder="31-40" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxAgeBreakdown.thirties"
+                 onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-2">
+        <mat-form-field>
+          <input matInput placeholder="41-50" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxAgeBreakdown.forties"
+                 onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-2">
+        <mat-form-field>
+          <input matInput placeholder="51-60" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxAgeBreakdown.fifties"
+                 onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-2">
+        <mat-form-field>
+          <input matInput placeholder="60+" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxAgeBreakdown.aboveSixty"
+                 onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+    </div>
+    <span style="font-size: 1rem;font-weight: 500;">Gender</span>
+    <div class="row">
+      <div class="col-sm-3">
+        <mat-form-field>
+          <input matInput placeholder="Male" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxGenderBreakdown.male"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field>
+          <input matInput placeholder="Female" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxGenderBreakdown.female"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+    </div>
+    <span style="font-size: 1rem;font-weight: 500;">Ethnicity</span>
+    <div class="row">
+      <div class="col-sm-3">
+        <mat-form-field>
+          <input matInput placeholder="White" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxEthnicityBreakdown.white"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field>
+          <input matInput placeholder="African American" type="number" [disabled]="!editEnabled" maxlength="50" required [(ngModel)]="data.approxEthnicityBreakdown.africanAmerican"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field>
+          <input matInput placeholder="Latino" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxEthnicityBreakdown.latino"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field>
+          <input matInput placeholder="Asian" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.approxEthnicityBreakdown.asian"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="Retailer Survey Score" maxlength="50" type="number" [disabled]="!editEnabled" required [(ngModel)]="data.retailerSurveyScore"
+             onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button color="primary" class="mat-raised-button mb-2" (click)="close('')">
+      Close
+    </button>
+    <button color="primary" class="mat-raised-button mat-primary mb-2" [disabled]="!editEnabled" (click)="save()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</div>

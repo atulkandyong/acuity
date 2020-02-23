@@ -1,0 +1,14 @@
+
+<div class="container">
+<div class="row">
+<div class="col-sm-3 text-center " *ngFor="let service of services">
+  <div class="card shadow p-4 mb-4 bg-white">
+    <img class="card-img-top" src="{{service.imageLink}}" alt="Card image" style="width:100%">
+    <div class="card-body">
+      <h4 class="card-title">{{service.name}}</h4>
+      <a [routerLink]='["/home/service"]' href="#" class="stretched-link"></a>
+    </div>
+  </div>
+</div>
+</div>
+</div>

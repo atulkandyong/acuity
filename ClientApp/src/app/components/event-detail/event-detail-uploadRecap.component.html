@@ -1,0 +1,22 @@
+<div class="mb-2">
+  <h1 mat-dialog-title>Upload Recap Sheet</h1>
+  <mat-dialog-content>
+    <div>
+      <div class="row" style="margin-bottom: 10px;">
+        <img src="{{url}}" style="max-height: 200px"> <br />
+      </div>
+      <button mat-raised-button color="primary" (click)="onRecapUploadClicked()">
+        <mat-icon>add</mat-icon>Select Files
+      </button>
+      <input #recapUpload type='file' style="display:none;" (change)="onSelectFile($event)" required>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button color="primary" class="mat-raised-button mb-2" (click)="close()">
+      Close
+    </button>
+    <button color="primary" class="mat-raised-button mat-primary mb-2" (click)="onAdd()">
+      Upload
+    </button>
+  </mat-dialog-actions>
+</div>

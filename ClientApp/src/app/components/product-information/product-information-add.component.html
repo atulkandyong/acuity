@@ -1,0 +1,23 @@
+<div class="mb-2">
+  <h1 mat-dialog-title>{{ mode }} Product</h1>
+  <mat-dialog-content [formGroup]="formGroup">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Product Name" formControlName="name" required maxlength="50">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Description" formControlName="description" required maxlength="300">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button color="primary" class="mat-raised-button mb-2" (click)="close('')">
+      Close
+    </button>
+    <button color="primary" class="mat-raised-button mat-primary mb-2" [disabled]="!formGroup.valid" (click)="save()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</div>

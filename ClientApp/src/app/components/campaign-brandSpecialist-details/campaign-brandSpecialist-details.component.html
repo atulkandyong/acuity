@@ -1,0 +1,46 @@
+<div class="mat-elevation-z8 table-responsive">
+  <table class="table table-hover table-bordered">
+    <tr>
+      <th>
+        Number of Events:
+      </th>
+      <td>{{eventCount}}</td>
+    </tr>
+    <tr>
+      <th>
+        Overall Percentage of bottles sold of Samples tasted at all Events:
+      </th>
+      <td>{{overAllPercentage}}</td>
+    </tr>
+    <tr>
+      <th>
+        Average Retailer Survey Score:
+      </th>
+      <td>{{avgRetailScore}}</td>
+    </tr>
+  </table>
+  <table class="table" mat-table [dataSource]="eventsList">
+    <ng-container matColumnDef="conductedOn">
+      <th mat-header-cell *matHeaderCellDef>Date of Event</th>
+      <td mat-cell *matCellDef="let element">{{element.conductedOn | date:'MM/dd/yyyy h:mm a'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="conductedAt">
+      <th mat-header-cell *matHeaderCellDef>Location of Event</th>
+      <td mat-cell *matCellDef="let element">{{element.storeName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="numberOfPeopleSampled">
+      <th mat-header-cell *matHeaderCellDef>Number of Customers who tasted anything</th>
+      <td mat-cell *matCellDef="let element">{{element.numberOfPeopleSampled}} </td>
+    </ng-container>
+    <ng-container matColumnDef="numberOfBottlesSold">
+      <th mat-header-cell *matHeaderCellDef>Number of bottles of each product sold</th>
+      <td mat-cell *matCellDef="let element">{{element.numberOfBottlesSold}} </td>
+    </ng-container>
+    <ng-container matColumnDef="retailerSurveyScore">
+      <th mat-header-cell *matHeaderCellDef>Retailer Survey Score</th>
+      <td mat-cell *matCellDef="let element">{{element.retailerSurveyScore}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsBottom"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsBottom;"></tr>
+  </table>
+</div>

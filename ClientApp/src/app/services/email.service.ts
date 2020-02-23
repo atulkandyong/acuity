@@ -1,0 +1,60 @@
+import { Injectable, Inject, Optional } from '@angular/core';
+import { Observable } from "rxjs/Rx";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
+import { tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EmailService {
+  private collectionApiUrl = 'api/email';  // URL to web api
+  constructor(
+    private http: HttpClient,
+    @Optional() @Inject(APP_BASE_HREF) origin: string) { }
+
+  sendEmail(from: string, fromEmail: string, message: string, ): Observable<any> {
+    return Observable.create(observer => {
+        debugger;
+      this.http.post(this.collectionApiUrl, { from: from, fromEmail: fromEmail, message: message, }).subscribe((data: any) => {
+        console.log('Email send successfully');
+        observer.next();
+      },
+      error => {
+        console.log('Error in sending email');
+        debugger;
+        observer.error(error);
+      });
+    });
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+  }
+
+}

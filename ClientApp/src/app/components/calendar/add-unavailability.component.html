@@ -1,0 +1,38 @@
+<div class="mb-2">
+  <h1 mat-dialog-title>Add Unavailability</h1>
+  <mat-dialog-content [formGroup]="form">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Description" formControlName="description" required/>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-placeholder>Start Date</mat-placeholder>
+        <mat-datetimepicker-toggle [for]="startDate" matSuffix></mat-datetimepicker-toggle>
+        <mat-datetimepicker #startDate type="date" openOnFocus="true" timeInterval="5">
+        </mat-datetimepicker>
+        <input matInput formControlName="startDate" type="datetime" [matDatetimepicker]="startDate"
+         required autocomplete="false">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-placeholder>End Date</mat-placeholder>
+        <mat-datetimepicker-toggle [for]="endDate" matSuffix></mat-datetimepicker-toggle>
+        <mat-datetimepicker #endDate type="date" openOnFocus="true" timeInterval="5">
+        </mat-datetimepicker>
+        <input matInput formControlName="endDate" type="datetime" [matDatetimepicker]="endDate"
+         required autocomplete="false">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button color="primary" class="mat-raised-button mb-2" (click)="close('')">
+      Close
+    </button>
+    <button color="primary" class="mat-raised-button mat-primary mb-2" (click)="save()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</div>

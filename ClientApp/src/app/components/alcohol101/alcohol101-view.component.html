@@ -1,0 +1,13 @@
+<div class="mb-2">
+  <button color="primary" class="float-right mt-2 mb-2 mr-2" mat-raised-button (click)="close()">Close</button>
+  <h1 mat-dialog-title>Alcohol 101</h1>
+  <p>
+    Title: {{data.name}}
+  </p>
+  <p>
+    Created On: {{data.createdOn | date:'MM/dd/yyyy h:mm a'}}
+  </p>
+  <p>
+    Description: {{data.description}}
+  </p>
+</div>

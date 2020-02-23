@@ -1,0 +1,43 @@
+<div class="mb-2">
+  <button color="primary" class="float-right mt-2 mb-2 mr-2" mat-raised-button (click)="close()">Close</button>
+  <button color="primary" class="float-right mt-2 mb-2 mr-2" mat-raised-button (click)="print()">Download & Print</button>
+  <h1 mat-dialog-title>Overall Campaign Metrics</h1>
+  <p>
+    <span style="font-weight: 500">Total number of Events : </span>{{data.campaignEventCount}}
+  </p>
+  <p>
+    <span style="font-weight: 500">Total number of people that have sampled product : </span>{{data.numberOfPeopleSampled}}
+  </p>
+  <p>
+    <span style="font-weight: 500">Total number of bottles sold : </span>{{data.numberOfBottlesSold}}
+  </p>
+  <p>
+    <span style="font-weight: 500">Percentage of bottles sold of sampling people : </span>{{data.prcentageOfBottlesSold}}%
+  </p>
+  <p>
+    <span style="font-weight: 500">Approximate number of Customers in Store during Event : </span>{{data.approxNumberOfCustomersInStore}}
+  </p>
+  <p>
+    <span style="font-weight: 500">Approximate demographic breakdown of sampling people</span>
+  </p>
+  <span style="font-weight: 500">Age</span>
+  <div class="ml-4  mb-2">
+    <div><span style="font-weight: 500">21-30 : </span>{{data.approxAgeBreakdown.Twenties | number : '1.2-2'}}%</div>
+    <div><span style="font-weight: 500">31-40 : </span>{{data.approxAgeBreakdown.Thirties | number : '1.2-2'}}%</div>
+    <div><span style="font-weight: 500">41-50 : </span>{{data.approxAgeBreakdown.Forties | number : '1.2-2'}}%</div>
+    <div><span style="font-weight: 500">51-60 : </span>{{data.approxAgeBreakdown.Fifties | number : '1.2-2'}}%</div>
+    <div><span style="font-weight: 500">60+ : </span>{{data.approxAgeBreakdown.AboveSixty | number : '1.2-2'}}%</div>
+  </div>
+  <span style="font-weight: 500">Gender</span>
+  <div class="ml-4 mb-2">
+    <div><span style="font-weight: 500">Male : </span>{{data.approxGenderBreakdown.Male | number : '1.2-2'}}%</div>
+    <div><span style="font-weight: 500">Female : </span>{{data.approxGenderBreakdown.Female | number : '1.2-2'}}%</div>
+  </div>
+  <span style="font-weight: 500">Ethnicity</span>
+  <div class="ml-4 mb-2">
+    <div><span style="font-weight: 500">White : </span>{{data.approxEthnicityBreakdown.White | number : '1.2-2'}}%</div>
+    <div><span style="font-weight: 500">African American : </span>{{data.approxEthnicityBreakdown.AfricanAmerican | number : '1.2-2'}}%</div>
+    <div><span style="font-weight: 500">Latino : </span>{{data.approxEthnicityBreakdown.Latino | number : '1.2-2'}}%</div>
+    <div><span style="font-weight: 500">Asian : </span>{{data.approxEthnicityBreakdown.Asian | number : '1.2-2'}}%</div>
+  </div>
+</div>

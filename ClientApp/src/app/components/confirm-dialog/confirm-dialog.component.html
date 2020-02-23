@@ -1,0 +1,11 @@
+<div class="mb-2">
+  <h1 mat-dialog-title>{{message}}</h1>
+  <mat-dialog-actions>
+    <button *ngIf="showConfirm" color="primary" class="mat-raised-button mat-primary mb-2" (click)="confirm()">
+      {{confirmButonMessage}}
+    </button>
+    <button *ngIf="showCancel" color="primary" class="mat-raised-button mb-2" (click)="close()">
+      No
+    </button>
+  </mat-dialog-actions>
+</div>

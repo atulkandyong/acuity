@@ -1,0 +1,38 @@
+<div class="mb-2">
+  <h1 mat-dialog-title>Upload Receipt</h1>
+  <mat-dialog-content [formGroup]="formGroup">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Name" required maxlength="50" formControlName="fileName">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Description" required maxlength="300" formControlName="description">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Amount" formControlName="amount"
+          onkeydown="javascript: return (event.currentTarget.value.length >= 10 || event.keyCode == 69) ? false : true">
+      </mat-form-field>
+    </div>
+    <div>
+      <div class="row" style="margin-bottom: 10px;">
+        <img src="{{url}}" style="max-height: 200px">
+      </div>
+      <button mat-raised-button color="primary" (click)="onReceiptUploadClicked()">
+        <mat-icon>add</mat-icon>Select Files
+      </button>
+      <input #receiptUpload type='file' style="display:none;" (change)="onSelectFile($event)" accept="image/*">
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button color="primary" class="mat-raised-button mb-2" (click)="close('')">
+      Close
+    </button>
+    <button color="primary" class="mat-raised-button mat-primary mb-2" [disabled]="!formGroup.valid" (click)="onAdd()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</div>

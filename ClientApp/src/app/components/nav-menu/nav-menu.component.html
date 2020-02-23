@@ -1,0 +1,33 @@
+<header>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow '>
+    <div class="container">
+      <a class="navbar-brand" [routerLink]='["/"]'>Acuity Pest Control</a>
+      <button color="primary" class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'
+              *ngIf="!isAuthorized();">
+            <a class="nav-link text-dark" style="cursor: pointer" (click)="openLoginDialog()">Login</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'
+              *ngIf="!isAuthorized();">
+            <a class="nav-link text-dark" style="cursor: pointer" (click)="openRegisterDialog()">Register</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'
+              *ngIf="isAuthorized();">
+            <a class="nav-link text-dark" style="cursor: pointer" (click)="openDashboard()">Dashboard</a>
+          </li>
+          <button mat-button [matMenuTriggerFor]="menu" *ngIf="isAuthorized();">{{authService.userDetail.name}}</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="SignOut()">
+              Sign Out
+            </button>
+          </mat-menu>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

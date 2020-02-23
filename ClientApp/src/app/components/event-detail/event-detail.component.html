@@ -1,0 +1,166 @@
+<div class="container mb-5">
+  <div class="row" style="justify-content: flex-end;">
+    <button color="primary" *ngIf="role == 'Brand Specialist'" mat-raised-button (click)="downloadRecapSheetTemplate()">
+      <mat-icon>arrow_downward</mat-icon>Download Recap Sheet
+    </button>
+    <button color="primary" *ngIf="role == 'Admin' || role == 'Brand Specialist'" style="margin-left: 5px" mat-raised-button (click)="openUpdateEventMetricDialog()">
+      Event Details
+    </button>
+    <button color="primary" *ngIf="role == 'Brand Specialist' && status == 'New'" style="margin-left: 5px" mat-raised-button (click)="openSubmitDialog()">
+      Submit
+    </button>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-form-field>
+        <input matInput placeholder="Name" readonly [(ngModel)]="name">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field>
+        <input matInput placeholder="Conducted On" readonly [(ngModel)]="conductedOn">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <mat-form-field>
+        <textarea matInput placeholder="Description" [(ngModel)]="description" readonly></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" *ngIf="role == 'Brand Specialist'">
+    <div class="col-sm-12">
+      <mat-form-field>
+        <input matInput placeholder="Store Name" readonly [(ngModel)]="storeName">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" *ngIf="role == 'Brand Specialist'">
+    <div class="col-sm-6">
+      <mat-form-field>
+        <input matInput placeholder="Contact Name" readonly [(ngModel)]="contactName">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field>
+        <input matInput placeholder="Contact Number" readonly [(ngModel)]="storeContact">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" *ngIf="role == 'Brand Specialist'">
+    <div class="col-sm-6">
+      <mat-form-field>
+        <input matInput placeholder="Street" readonly [(ngModel)]="street">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field>
+        <input matInput placeholder="City" readonly [(ngModel)]="city">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" *ngIf="role == 'Brand Specialist'">
+    <div class="col-sm-6">
+      <mat-form-field>
+        <input matInput placeholder="State" readonly [(ngModel)]="state">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field>
+        <input matInput placeholder="ZipCode" readonly [(ngModel)]="zipCode">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row" *ngIf="role == 'Brand Specialist'">
+    <div class="col-sm-12">
+      <mat-form-field>
+        <input matInput placeholder="Instructions" readonly [(ngModel)]="instructions">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- Recap Sheet list start -->
+      <h5 class="float-left mt-1">Recap Sheets</h5>
+      <div class="float-right mb-3" *ngIf="role == 'Brand Specialist' || role == 'Admin'">
+        <button mat-raised-button color="primary" [disabled]="(role == 'Brand Specialist' && status == 'Submitted')" (click)="openAddRecapDialog()">
+          <mat-icon>arrow_upward</mat-icon>
+          Upload Recap Sheet
+        </button>
+      </div>
+      <table class="table" mat-table [dataSource]="recapSheetList" style="width: 100%" class="mat-elevation-z1">
+        <ng-container matColumnDef="fileName">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.fileName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef>File</th>
+          <td mat-cell *matCellDef="let element">
+            <a (click)="open(element.fileContent, element.contentType)" style="cursor: pointer" target="_blank">
+              <img src="{{element.src}}" alt="Recap Sheet" style="height: 42px; width: auto;">
+            </a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="uploadedOn">
+          <th mat-header-cell *matHeaderCellDef>Uploaded On</th>
+          <td mat-cell *matCellDef="let element"> {{element.uploadedOn | date:'MM/dd/yyyy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element">
+            <button title="Download" mat-raised-button (click)="download(element.fileContent, element.contentType, element.fileName)">
+              <mat-icon color="primary">arrow_downward</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      <h5 class="float-left mt-1">Photos</h5>
+      <div class="float-right mb-3" *ngIf="role == 'Brand Specialist' || role == 'Admin'">
+        <button mat-raised-button color="primary" [disabled]="role == 'Brand Specialist' && status == 'Submitted'" (click)="openAddPhotoDialog()">
+          <mat-icon>arrow_upward</mat-icon>
+          Upload Photo
+        </button>
+      </div>
+      <table class="table" mat-table [dataSource]="photoList" style="width: 100%" class="mat-elevation-z1">
+        <ng-container matColumnDef="fileName">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.fileName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef>File</th>
+          <td mat-cell *matCellDef="let element">
+            <a (click)="open(element.fileContent, element.contentType)" style="cursor: pointer" target="_blank">
+              <img src="{{element.src}}" alt="Photo" style="height: 42px; width: auto;">
+            </a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="uploadedOn">
+          <th mat-header-cell *matHeaderCellDef>Uploaded On</th>
+          <td mat-cell *matCellDef="let element"> {{element.uploadedOn | date:'MM/dd/yyyy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element">
+            <button title="Download" mat-raised-button (click)="download(element.fileContent, element.contentType, element.fileName)">
+              <mat-icon color="primary">arrow_downward</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

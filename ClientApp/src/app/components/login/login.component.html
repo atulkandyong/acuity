@@ -1,0 +1,31 @@
+<form style="padding-bottom: 20px;">
+  <h1 mat-dialog-title>Login</h1>
+  <mat-dialog-content>
+    <table class="example-full-width" style="width: 100%;" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field style="width: 100%;">
+            <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field style="width: 100%;">
+            <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr *ngIf="errorMessage">
+        <td>
+          <p>Invalid Login Credentials </p>
+        </td>
+      </tr>
+    </table>
+    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button (click)="login()" color="primary">Login</button>
+    <button mat-button type="button" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

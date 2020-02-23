@@ -1,0 +1,130 @@
+<div class="mat-elevation-z8">
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="btn-group" style="margin-top: 8px;margin-bottom: 8px">
+        <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Previous
+        </div>
+        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+          Today
+        </div>
+        <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()">
+          Next
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+  <br />
+  <ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <div class="cal-cell-top">
+      <!--<span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>-->
+      <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <div style="position: absolute">
+      <div class="cal-events ng-star-inserted" *ngFor="let event of day.events | slice:0:3">
+        <div class="cal-event ng-star-inserted" dragactiveclass="cal-drag-active" mwldraggable=""
+             ng-reflect-klass="cal-event" ng-reflect-ng-style="[object Object]" ng-reflect-drop-data="[object Object]"
+             ng-reflect-drag-axis="[object Object]" ng-reflect-validate-drag="function isWithinThreshold(_a)"
+             ng-reflect-drag-active-class="cal-drag-active" ng-reflect-contents="Pay Day" ng-reflect-placement="auto"
+             ng-reflect-event="[object Object]" ng-reflect-append-to-body="true" data-calendar-clickable="true"
+             [ngStyle]="{'background-color':event.color.primary}"></div>
+        <small style="margin: 5px">{{ event.title }}</small>
+      </div>
+      <small *ngIf="day.events.length >= 3" style="margin: 5px">More..</small>
+    </div>
+  </ng-template>
+  <mwl-calendar-month-view [cellTemplate]="customCellTemplate" [viewDate]="viewDate" [events]="events"
+    (beforeViewRender)="updateCalendarEvents($event)">
+  </mwl-calendar-month-view>
+  <ng-template #modalContent let-close="close">
+    <div class="modal-header">
+      <h5 class="modal-title">Event action occurred</h5>
+      <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        Action:
+        <pre>{{ modalData?.action }}</pre>
+      </div>
+      <div>
+        Event:
+        <pre>{{ modalData?.event | json }}</pre>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()">
+        OK
+      </button>
+    </div>
+  </ng-template>
+</div>
+<br>
+<div class="mat-elevation-z8">
+  <h4 *ngIf="role == 'Admin'" style="padding: 15px;margin-bottom: auto;">Brand Specialist Unavailability</h4>
+  <button *ngIf="role == 'Brand Specialist'" color="primary" class="float-right mt-2 mb-2 mr-2" mat-raised-button
+    (click)="openAddUnavailabilityDialog()">Request Unavailability</button>
+  <table class="table" mat-table [dataSource]="brandSpecialistUnavailability">
+    <ng-container matColumnDef="brandSpecialist">
+      <th mat-header-cell *matHeaderCellDef> Brand Specialist </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.brandSpecialist}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.description}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef> From </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.startDate | date:'MM/dd/yyyy'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell *matHeaderCellDef> Till </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.endDate | date:'MM/dd/yyyy'}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.status}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button *ngIf="element.status=='New' && role == 'Brand Specialist'" mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn">
+          <mat-icon aria-label="Delete" (click)="openDeleteDialog(element.id)">delete</mat-icon>
+        </button>
+        <button *ngIf="element.status=='New' && role == 'Admin'" mat-icon-button matTooltip="Click to Accept" class="iconbutton"
+          color="primary">
+          <mat-icon aria-label="Accept"
+            (click)="openStatusDialog(element, true)">
+            check_circle_outline</mat-icon>
+        </button>
+        <button *ngIf="element.status=='New' && role == 'Admin'" mat-icon-button matTooltip="Click to Reject" class="iconbutton"
+          color="warn">
+          <mat-icon aria-label="Reject"
+            (click)="openStatusDialog(element, false)">
+            block</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+</div>

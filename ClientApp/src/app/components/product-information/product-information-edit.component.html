@@ -1,0 +1,28 @@
+<div class="mb-2">
+  <h1 mat-dialog-title>Edit Product</h1>
+  <mat-dialog-content>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Name" required maxlength="50" [(ngModel)]="data.name">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Description" required maxlength="300" [(ngModel)]="data.description">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <textarea matInput placeholder="Content" formControlName="data.content" required maxlength="300"></textarea>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button color="primary" class="mat-raised-button mb-2" (click)="close('')">
+      Close
+    </button>
+    <button color="primary" class="mat-raised-button mat-primary mb-2" (click)="onEdit()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,51 @@
+<div class="mb-2">
+  <h1 mat-dialog-title>Edit User</h1>
+  <mat-dialog-content [formGroup]="formGroup">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="User Name" required maxlength="50" formControlName="userName">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="First Name" required maxlength="50" formControlName="firstName">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Last Name" required maxlength="50" formControlName="lastName">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Password" [type]="showPassword ? 'text' : 'password'" required
+          formControlName="password">
+        <button mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Show password'"
+          [attr.aria-pressed]="showPassword">
+          <mat-icon>{{showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of data.roles" [value]="role.id">
+            {{ role.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-checkbox formControlName="isActive">Active User</mat-checkbox>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button color="primary" class="mat-raised-button mb-2" (click)="close('')">
+      Close
+    </button>
+    <button color="primary" class="mat-raised-button mat-primary mb-2" [disabled]="!formGroup.valid" (click)="onEdit()">
+      Save
+    </button>
+  </mat-dialog-actions>
+</div>
