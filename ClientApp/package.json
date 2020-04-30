@@ -38,7 +38,7 @@
     "flatpickr": "^4.6.2",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment-timezone": "^0.5.26",
     "popper.js": "^1.15.0",
     "rrule": "^2.6.2",
